@@ -5,8 +5,9 @@ Actividad materia POO - UML: Consultorio Odontologico
 Para este ejercicio tendremos en cuenta: polimorfismo, sobrecarga, herencia, abstracción y cardinaliad de las relaciones entre clases.
 
 
-##Consigna
-Resumen: Diseñar un diagrama de clases UML que represente el funcionamiento b´asico de un consultorio
+## Consigna
+
+**Resumen**: Diseñar un diagrama de clases UML que represente el funcionamiento b´asico de un consultorio
 odontol´ogico, aplicando los conceptos de clase, herencia, polimorfismo, sobrecarga y cardinalidad.
 Un consultorio odontol´ogico atiende diferentes tipos de pacientes y ofrece distintos servicios.
 El consultorio cuenta con diferentes tipos de personas, registros de atenci´on, pr´acticas odontol´ogicas y
@@ -27,6 +28,6 @@ entre las entidades teniendo en cuenta que el sistema deber´a:
 (c) Representar relaciones y cardinalidades entre las entidades.
 (d) Se deber´a redactar una breve justificaci´on sobre el modelo.
 
-Entregables
+**Entregables**
 En esta etapa se debera hacer entrega del diagrama de clases bajo la especificaci´on UML y la justificaci´on
 escrita.
