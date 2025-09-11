@@ -1,0 +1,25 @@
+'Trabajo Practico N°3 - UML - Consultorio Odontológico
+
+@startuml
+
+abstract class persona{
+    #nombre: String
+    #apellido: String
+    #dni: int
+}
+
+class paciente{
+
+}
+
+class odontologo{
+
+}
+
+
+
+'Relacion de herencia
+persona <|-- paciente: es un
+persona <|-- odontologo: es un
+
+@enduml
