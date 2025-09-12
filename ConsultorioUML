@@ -5,7 +5,8 @@
 title Consultorio Odontologico
 
 class Consultorio{
-
+    -nombre: String
+    --
 }
 
 abstract class Persona{
@@ -14,25 +15,29 @@ abstract class Persona{
     #dni: int
     #edad: int
     --
-
+    -mostrarDatos()
 }
 
 class Paciente{
-    -obraSocial: String
+    -obraSocial: boolean
     --
-    +solicitarTurno:
-    +consultarHistorialMedico:
+    +solicitarTurno():
+    +consultarHistorialMedico():
 }
 
 class Odontologo{
     -especialidad: String
     -matricula: int
     --
+    -emitirInforme()
 
 }
 
 class Administrativo{
-
+    -cargo: String
+    --
+    -registrarPago():
+    -altaCliente():
 }
 
 
