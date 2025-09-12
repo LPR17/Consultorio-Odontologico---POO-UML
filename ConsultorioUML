@@ -2,24 +2,49 @@
 
 @startuml
 
-abstract class persona{
+title Consultorio Odontologico
+
+class Consultorio{
+
+}
+
+abstract class Persona{
     #nombre: String
     #apellido: String
     #dni: int
+    #edad: int
 }
 
-class paciente{
+class Paciente{
 
 }
 
-class odontologo{
+class Odontologo{
+    -especialidad: String
+    -matricula: int
+}
+
+class Administrativo{
+
+}
+
+
+class HistorialClinico{
 
 }
 
 
 
 'Relacion de herencia
-persona <|-- paciente: es un
-persona <|-- odontologo: es un
+Persona <|-- Paciente: es un
+Persona <|-- Odontologo: es un
+Persona <|-- Administrativo: es un
+
+'Relación de composición
+Paciente *-- HistorialClinico: tiene un
+
+'Relación de agregación
+Consultorio o-- Odontologo: emplea
+Consultorio o-- Administrativo: emplea
 
 @enduml

@@ -16,7 +16,7 @@ sus relaciones y comportamientos relevantes.
 Se deberá modelar la estructura general del sistema, distinguiendo los roles, responsabilidades y relaciones
 entre las entidades teniendo en cuenta que el sistema deberá:
 1. Registrar y actualizar información personal (pacientes, odontólogos, administrativos).
-2. Registrar y consultar el historial cl´ınico de un paciente.
+2. Registrar y consultar el historial clínico de un paciente.
 3. Asignar y ejecutar prácticas odontológicas a pacientes.
 4. Gestionar registros de atención realizados en el consultorio.
 5. Emitir informes o resumenes de atenciones realizadas o de gestiones administrativas.
