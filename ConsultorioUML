@@ -13,15 +13,22 @@ abstract class Persona{
     #apellido: String
     #dni: int
     #edad: int
+    --
+
 }
 
 class Paciente{
-
+    -obraSocial: String
+    --
+    +solicitarTurno:
+    +consultarHistorialMedico:
 }
 
 class Odontologo{
     -especialidad: String
     -matricula: int
+    --
+
 }
 
 class Administrativo{
