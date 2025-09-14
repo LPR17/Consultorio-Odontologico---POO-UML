@@ -2,25 +2,36 @@
 
 @startuml
 
+'Ordena desde arriba hacia abajo
+top to bottom direction
+
+
 title Consultorio Odontologico
 
-class Consultorio{
-    -nombre: String
-    --
-}
-
 abstract class Persona{
+    #id: int
     #nombre: String
     #apellido: String
     #dni: int
     #edad: int
+    #direccion: String
+    #telefono: String
+    #mail: String
     --
-    -mostrarDatos()
+    +actualizarInformacion(nombre: String, email: String, telefono: String, direccion: String):
+    +getId():int
+    +getNombre():String
+    +getEmail():String
 }
 
 class Paciente{
+    -fechaDeNacimiento: String
     -obraSocial: boolean
+    -seguroMedico: String
+    -historiaClinica:
+    -odontograma: String
     --
+    +getSeguro():String
     +solicitarTurno():
     +consultarHistorialMedico():
 }
@@ -36,15 +47,69 @@ class Odontologo{
 class Administrativo{
     -cargo: String
     --
-    -registrarPago():
-    -altaCliente():
 }
 
+'===== GESTION DE DATOS =====
+
+class GestionAdministrativa{
+    -id: int
+    -tipo: String
+    -descripcion: String
+    -fecha: String
+    -responsable: Administrativo
+    --
+    +registrarPago():
+    -crearAtencion():
+    -obtenerHistorialClinico(Paciente):
+    'Usamos sobrecarga para actualizar y crear
+    -cargarInfo():
+    -actualizarInfo():
+    -validarAcceso():
+    +emitirInforme(): String
+    -calcularCosto(Atencion):
+    -altaPaciente():
+    -gestionarPago():
+
+}
+
+class Atencion{
+    -id: int
+    -fechaAtencion: String
+    -notas: String
+    -costo: int
+    -odontologo: Odontologo
+    -paciente: Paciente
+    -practicaOdontologica: List<PracticaOdontologica>
+    --
+    +calcularCostoTotal():Double
+}
+
+class PracticaOdontologica{
+    -id: int
+    -costo: Double
+    -nombre: String
+    -descripcion: String
+    --
+    +calcularCosto(paciente: Paciente): Double
+
+}
 
 class HistorialClinico{
-
+    -paciente:
+    -listaAtenciones: List<Atencion>
 }
 
+class Consultorio{
+    -nombre: String
+    -pacientes: List<Paciente>
+    -odontologos: List<Odontologo>
+    -aministrativos: List<Administrativo>
+    -atenciones:List<Atencion>
+    -practicasOfrecidas: List<PracticaOdontologica>
+    --
+    +registrarPaciente(paciente: Paciente):
+    +emitirInforme(tipo: String): String
+}
 
 
 'Relacion de herencia
@@ -52,11 +117,52 @@ Persona <|-- Paciente: es un
 Persona <|-- Odontologo: es un
 Persona <|-- Administrativo: es un
 
-'Relación de composición
-Paciente *-- HistorialClinico: tiene un
+'Relación de composición:
+'Un paciente tiene un historial clinico
+Paciente "1" *-- "1" HistorialClinico: <<tiene>>
 
-'Relación de agregación
-Consultorio o-- Odontologo: emplea
-Consultorio o-- Administrativo: emplea
+'Relación de agregación:
+'Un historial clinico contiene registros de atención, pero los registros de atención pueden existir por si solos (Puedo tener registros sin historia)
+HistorialClinico "1" o--  "0.." Atencion: <<contiene>>
+
+'Asociaciones de registro de atención:
+'Cada registro se realiza para un paciente y un odontologo
+'Un registro de atención tiene un paciente
+Atencion "0..*" -- "1" Paciente : <<para>>
+'Un registro de atención puede tener varios odontologos
+Atencion "0..*" -- "1..*" Odontologo : <<por>>
+'Un registro de atención puede incluir una o más practicas odontologicas
+Atencion "0..*" -- "1..*" PracticaOdontologica : <<incluye>>
+
+'Gestion administrativa es manejada por un administrativo
+'Un administrativo es responsable de 0 o más gestiones administrativas
+GestionAdministrativa "0..*" -- "1" Administrativo: <<responsable>>
+
+'Dependencia del calculo
+'Cacular costo en practica odontologica usa información del paciente
+PracticaOdontologica .1.> Paciente: <<usa>>
+PracticaOdontologica ..> Paciente: usa (calcularCosto)
+
+'Agregacion de la clase consultorio
+'El consultorio gestiona todas las relaciones de los objetos
+Consultorio "1" 0-- "0..*" Paciente: <<gestiona>>
+Consultorio "1" 0-- "0..*" Odontologo: <<emplea>>
+Consultorio "1" 0-- "0..*" Administrativo: <<emplea>>
+Consultorio "1" 0-- "0..*" Atencion: <<registra>>
+Consultorio "1" 0-- "0..*" PracticaOdontologica: <<ofrece>>
+
+'===== NOTAS ACLARATORIAS AL MODELO =====
+note right of Persona
+    Clase Abstracta.
+    Define atributos y métodos comunes para todos los roles de personas
+end note
+
+note right of PracticaOdontologica
+    **Polimorfismo**
+    El metodo calcularCosto() puede ser sobreescrito para diferentes tipos de practicas o seguros
+end note
+
+note "Un consultorio centraliza la gestión de todas las entidades
+, como se detalla en los requisitos del problema" as N1 Consultorio ..N1
 
 @enduml
